@@ -35,7 +35,7 @@ spec:
         s3:
           type: s3
           url: "${MINIO_S3URL}"
-          bucket: "${MINIO_S3PREFIX}-jellyfin"
+          bucket: "${MINIO_S3PREFIX}-jellyfin-tv"
           accessKey: "${MINIO_S3ID}"
           secretKey: "${MINIO_S3KEY}"
           encrKey: "${MINIO_S3KEY}"
