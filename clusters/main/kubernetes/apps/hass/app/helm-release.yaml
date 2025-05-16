@@ -64,7 +64,7 @@ spec:
             enabled: false
           certManager:
             enabled: true
-            certificateIssuer: ddomain-0-le-prod  
+            certificateIssuer: domain-0-le-prod  
     homeassistant:
       trusted_proxies:
       - 172.16.0.0/16
