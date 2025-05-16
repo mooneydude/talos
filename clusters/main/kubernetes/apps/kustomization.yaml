@@ -6,4 +6,4 @@ resources:
   # - docuseal/ks.yaml
   - ext-cow/ks.yaml
   # - hass/ks.yaml
-  - jellyfin/ks.yaml
+  # - jellyfin/ks.yaml
