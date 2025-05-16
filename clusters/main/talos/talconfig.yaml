@@ -89,6 +89,25 @@ nodes:
       installDiskSelector:
         # size: <= 600GB
         model: Fan*
+    - hostname: k8s-worker-2
+      ipAddress: 192.168.2.206
+      nameservers:
+        - 1.1.1.1
+        - 8.8.8.8
+      installDiskSelector:
+        size: '> 200GB'
+    - hostname: k8s-worker-3
+      ipAddress: 192.168.2.205
+      nameservers:
+        - 1.1.1.1
+        - 8.8.8.8
+      installDiskSelector:
+        size: <= 200GB
+      schematic:
+          customization:
+              systemExtensions:
+                  officialExtensions:
+                      - siderolabs/qemu-guest-agent
 
 controlPlane:
     patches:
