@@ -35,7 +35,7 @@ spec:
         s3:
           type: s3
           url: "${MINIO_S3URL}"
-          bucket: "${MINIO_S3PREFIX}-jellyfin-tv"
+          bucket: "${MINIO_S3PREFIX}-jellyfin"
           accessKey: "${MINIO_S3ID}"
           secretKey: "${MINIO_S3KEY}"
           encrKey: "${MINIO_S3KEY}"
@@ -58,8 +58,8 @@ spec:
             type: restic
             credentials: s3
             dest:
-              # volumeSnapshotClassName: csi-ceph-blockpool 
+              volumeSnapshotClassName: csi-ceph-blockpool 
               enabled: true
             src:
-              # volumeSnapshotClassName: csi-ceph-blockpool 
+              volumeSnapshotClassName: csi-ceph-blockpool 
               enabled: true
