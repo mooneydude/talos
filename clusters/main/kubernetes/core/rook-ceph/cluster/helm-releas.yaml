@@ -130,7 +130,7 @@ spec:
                 - rook-ceph.${DOMAIN_1}
               secretName: rook-ceph-dashboard
           host:
-            name: "ceph.${DOMAIN_1}"
+            name: "rook-ceph.${DOMAIN_1}"
             path: "/"
       cephBlockPools:
         - name: ceph-nvme
