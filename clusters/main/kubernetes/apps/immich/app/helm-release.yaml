@@ -1,0 +1,122 @@
+---
+# yaml-language-server: schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: immich
+  namespace: immich
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: immich
+      version: 17.55.4
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+    global:
+      stopAll: false
+
+    TZ: America/Chicago
+    credentials:
+      s3:
+        type: s3
+        url: "${MINIO_S3URL}"
+        bucket: "${MINIO_S3PREFIX}-immich"
+        accessKey: "${MINIO_S3ID}"
+        secretKey: "${MINIO_S3KEY}"
+        encrKey: "${MINIO_S3KEY}"       
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: external
+        hosts:
+          - host: pics.${DOMAIN_1}
+        integrations:
+          traefik:
+            enabled: false
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
+    persistence:
+      profile:
+        volsync:
+          - name: prf
+            type: restic
+            credentials: s3
+            dest:
+              volumeSnapshotClassName: csi-ceph-blockpool
+              enabled: true
+            src:
+              volumeSnapshotClassName: csi-ceph-blockpool
+              enabled: true
+      thumbs:
+        volsync:
+          - name: thn
+            type: restic
+            credentials: s3
+            dest:
+              volumeSnapshotClassName: csi-ceph-blockpool
+              enabled: true
+            src:
+              volumeSnapshotClassName: csi-ceph-blockpool
+              enabled: true
+
+      backups:
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/immich/backups
+      library:
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/immich/library
+      uploads:
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/immich/upload
+      video:
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/immich/encoded-video
+
+      external-pics:
+        enabled: true
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/media
+        mountPath: /usr/src/app/external
+        targetSelector:
+          # Main pod/container is server
+          main:
+            main: {}
+          microservices:
+            microservices: {}
+
+    cnpg:
+      main:
+        mode: recovery  # Set to 'recovery' when recovery from S3, also change the revisions 
+        backups:
+          enabled: false  # Set to 'false' when performing new install (recovery)
+          credentials: s3
+          retentionPolicy: "7d"
+          revision: "3"
+        recovery:
+          method: object_store
+          credentials: s3
+          revision: "2"
