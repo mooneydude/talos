@@ -1,0 +1,189 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nextcloud
+  namespace: nextcloud
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: nextcloud
+      version: 33.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    global:
+      stopAll: false
+    TZ: America/Chicago
+    credentials:
+      s3:
+        type: s3
+        url: "${MINIO_S3URL}"
+        bucket: "${MINIO_S3PREFIX}-nextcloud-rwx"
+        accessKey: "${MINIO_S3ID}"
+        secretKey: "${MINIO_S3KEY}"
+        encrKey: "${MINIO_S3KEY}"
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: external
+        hosts:
+          - host: cloud.${DOMAIN_1}
+            paths:
+            - path: /
+              pathType: Prefix
+        integrations:
+          traefik:
+            enabled: false
+            entrypoints:
+              - websecure        
+          certManager:
+            certificateIssuer: domain-0-le-prod
+            enabled: true
+    persistence:
+      config:
+        storageClass: ceph-filesystem
+        size: 1Gi
+        accessModes:
+          - ReadWriteMany        
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            dest:
+              volumeSnapshotClassName: ceph-filesystem
+              enabled: true
+            src:
+              volumeSnapshotClassName: ceph-filesystem
+              enabled: true
+              trigger:
+                schedule: 30 7 * * *
+      html:
+        storageClass: ceph-filesystem
+        size: 10Gi
+        accessModes:
+          - ReadWriteMany        
+        volsync:
+          - name: html
+            type: restic
+            credentials: s3
+            dest:
+              volumeSnapshotClassName: ceph-filesystem
+              enabled: true
+            src:
+              volumeSnapshotClassName: ceph-filesystem
+              enabled: true
+              trigger:
+                schedule: 0 8 * * *
+      data:
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/nc_userdata/rwx_data
+    cnpg:
+      main:
+        mode: recovery
+        backups:
+          enabled: false
+          credentials: s3
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 45 7 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false           
+          retentionPolicy: "7d"
+          revision: "4"
+        recovery:
+          method: object_store
+          credentials: s3
+          revision: "3"
+    nextcloud:
+      credentials:
+        initialAdminPassword: ${NEXTCLOUD_PWD}
+        initialAdminUser: ${NEXTCLOUD_USER}
+      general:
+        accessIP: ${NGINX_EXTERNAL_IP}
+        default_phone_region: US
+      previews:
+        providers:
+        - BMP
+        - GIF
+        - JPEG
+        - Krita
+        - MarkDown
+        - MP3
+        - OpenDocument
+        - PNG
+        - TXT
+        - XBitmap
+    # workload:
+    #   main:
+    #     type: Deployment
+    #     strategy: RollingUpdate
+    #     replicas: 2
+    #     podSpec:
+    #       containers:
+    #         main:
+    #           enabled: true
+    #           primary: true
+    #           envFrom:
+    #             - configMapRef:
+    #                 name: nextcloud-config
+    #           probes:
+    #             liveness:
+    #               enabled: true
+    #               type: exec
+    #               command: /healthcheck.sh
+    #             readiness:
+    #               enabled: true
+    #               type: exec
+    #               command: /healthcheck.sh
+    #             startup:
+    #               enabled: true
+    #               type: tcp
+    #               port: "{{ .Values.service.nextcloud.ports.nextcloud.targetPort }}"
+    #   nginx:
+    #     enabled: true
+    #     type: Deployment
+    #     strategy: RollingUpdate
+    #     replicas: 2
+    #     podSpec:
+    #       containers:
+    #         nginx:
+    #           enabled: true
+    #           primary: true
+    #           imageSelector: nginxImage
+    #           probes:
+    #             readiness:
+    #               enabled: true
+    #               path: /robots.txt
+    #               port: "{{ .Values.service.main.ports.main.port }}"
+    #               httpHeaders:
+    #                 Host: kube.internal.healthcheck
+    #             liveness:
+    #               enabled: true
+    #               path: /robots.txt
+    #               port: "{{ .Values.service.main.ports.main.port }}"
+    #               httpHeaders:
+    #                 Host: kube.internal.healthcheck
+    #             startup:
+    #               enabled: true
+    #               type: tcp
+    #               port: "{{ .Values.service.main.ports.main.port }}"
