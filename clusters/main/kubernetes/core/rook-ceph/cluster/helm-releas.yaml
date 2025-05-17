@@ -41,10 +41,10 @@ spec:
         rbd_default_stripe_count = 16
       cephClusterSpec:
         mgr:
-          count: 3
+          count: 1
           allowMultiplePerNode: false
         mon:
-          count: 3
+          count: 1
           allowMultiplePerNode: false
         resources:
           mgr:
