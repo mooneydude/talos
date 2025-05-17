@@ -8,3 +8,5 @@ resources:
   - hass/ks.yaml
   - jellyfin/ks.yaml
   - speedtest-tracker/ks.yaml
+  - ext-plex/ks.yaml
+  - vaultwarden/ks.yaml
