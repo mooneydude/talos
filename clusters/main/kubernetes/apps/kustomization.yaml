@@ -12,3 +12,4 @@ resources:
   - vaultwarden/ks.yaml
   - immich/ks.yaml
   - nextcloud/ks.yaml
+  - ext-talk/ks.yaml
