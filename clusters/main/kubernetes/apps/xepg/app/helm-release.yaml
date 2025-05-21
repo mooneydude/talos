@@ -1,0 +1,62 @@
+---
+# yaml-language-server: schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: xepg
+  namespace: xepg
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 14.5.3
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+    global:
+      stopAll: false
+
+    TZ: America/Chicago
+
+    image:
+      repository: docker.io/mooneydude/xepg
+      pullPolicy: IfNotPresent
+      tag: latest@sha256:30efb89c311418c6b5ef76d84da122f219de4813922acc43ef4e5f0367f0439f
+    securityContext:
+      container:
+        readOnlyRootFilesystem: false
+        runAsNonRoot: false
+        runAsUser: 0
+        runAsGroup: 0      
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: ${XMLTV_IP}
+        ports:
+          main:
+            port: 80
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              env:
+                SERVER_PORT: "{{ .Values.service.main.ports.main.port }}"
+    #             SERVER_ROOT: "/html"                   

@@ -14,3 +14,5 @@ resources:
   - nextcloud/ks.yaml
   - ext-talk/ks.yaml
   - stun-turn/ks.yaml
+  - xepg/ks.yaml
+  - xteve/ks.yaml
