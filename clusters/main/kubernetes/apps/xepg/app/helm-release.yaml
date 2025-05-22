@@ -51,7 +51,7 @@ spec:
         loadBalancerIP: ${XMLTV_IP}
         ports:
           main:
-            port: 3000
+            port: 80
     workload:
       main:
         podSpec:
