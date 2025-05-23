@@ -37,7 +37,7 @@ spec:
     image:
       repository: docker.io/mooneydude/telly
       pullPolicy: IfNotPresent
-      tag: latest@sha256:ccb325195da66351004c98a24332af033e9daaeac8ecfd7912b870c71150f1e4
+      tag: latest@sha256:f60e11ad30232122c4c76a7185481c0bd8289f12119f5377b1c7c4f698025316
     securityContext:
       container:
         readOnlyRootFilesystem: false
