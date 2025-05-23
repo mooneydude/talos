@@ -37,7 +37,7 @@ spec:
     image:
       repository: docker.io/tellytv/telly
       pullPolicy: IfNotPresent
-      tag: latest@sha256:ad4a0b80ba5a6d2cdd9897dd807e0d69af16289e7055b80d32887cf715314595
+      tag: dev@sha256:826feaf88e799ae2a8eead0eb5dfe955bf5da8fefa7b8bb74be79a14a688b301
     securityContext:
       container:
         readOnlyRootFilesystem: false
