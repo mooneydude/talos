@@ -50,9 +50,9 @@ spec:
         loadBalancerIP: ${TELLY_IP}
         ports:
           main:
-            port: 6077
-            targetPort: 6077
-            protocol: http            
+            port: 80
+            # targetPort: 6077
+            # protocol: http            
     workload:
       main:
         podSpec:
