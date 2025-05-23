@@ -38,7 +38,7 @@ spec:
     image:
       repository: docker.io/mooneydude/xepg
       pullPolicy: IfNotPresent
-      tag: latest@sha256:c8b0ce2d44fe89ab4f642fe0b91bf34616257d1b3f12559a6c7c25fff319b9e9
+      tag: latest@sha256:b4eee103606da236741091706f1bea803ebcaad6ba274bd699edbba5da18286c
     securityContext:
       container:
         readOnlyRootFilesystem: false
@@ -61,5 +61,5 @@ spec:
             main:
               env:
                 SERVER_PORT: "{{ .Values.service.main.ports.main.port }}"
-                CRON: "{{ .Values.CRON_SCHEDULE | default \"0 0 * * *\" }}"                
+                CRON: "0 0 * * *"               
     #             SERVER_ROOT: "/html"                   
