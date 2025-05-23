@@ -38,7 +38,7 @@ spec:
     image:
       repository: docker.io/mooneydude/xepg
       pullPolicy: IfNotPresent
-      tag: latest@sha256:c3f216494d2ff5c5e2e6ec5c88f68006001c32231c0ab718b3601c3a3bf1767c
+      tag: latest@sha256:ae35ed673fae9834c44fce31e7447da466fdafd55e8e7f01bce6e9506727fdff
     securityContext:
       container:
         readOnlyRootFilesystem: false
@@ -51,7 +51,7 @@ spec:
         loadBalancerIP: ${XMLTV_IP}
         ports:
           main:
-            port: 80
+            port: 3000
             targetPort: 3000
             protocol: http            
     workload:
