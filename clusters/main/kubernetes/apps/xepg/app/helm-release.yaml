@@ -61,4 +61,5 @@ spec:
             main:
               env:
                 SERVER_PORT: "{{ .Values.service.main.ports.main.port }}"
+                CRON: "{{ .Values.CRON_SCHEDULE | default \"0 0 * * *\" }}"                
     #             SERVER_ROOT: "/html"                   
