@@ -35,9 +35,9 @@ spec:
 
     TZ: America/Chicago
     image:
-      repository: docker.io/tellytv/telly
+      repository: docker.io/mooneydude/telly
       pullPolicy: IfNotPresent
-      tag: dev@sha256:826feaf88e799ae2a8eead0eb5dfe955bf5da8fefa7b8bb74be79a14a688b301
+      tag: latest@sha256:f60e11ad30232122c4c76a7185481c0bd8289f12119f5377b1c7c4f698025316
     securityContext:
       container:
         readOnlyRootFilesystem: false
@@ -50,7 +50,7 @@ spec:
         loadBalancerIP: ${TELLY_IP}
         ports:
           main:
-            port: 80
+            port: 6077
             # targetPort: 6077
             # protocol: http            
     workload:
