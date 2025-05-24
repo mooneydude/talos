@@ -17,3 +17,4 @@ resources:
   - xepg/ks.yaml
   - xteve/ks.yaml
   # - telly/ks.yaml
+  - grafana/ks.yaml
