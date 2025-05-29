@@ -7,7 +7,7 @@ resources:
   - ext-cow/ks.yaml
   - hass/ks.yaml
   - jellyfin/ks.yaml
-  - speedtest-tracker/ks.yaml
+  # - speedtest-tracker/ks.yaml
   - ext-plex/ks.yaml
   - vaultwarden/ks.yaml
   # - immich/ks.yaml
