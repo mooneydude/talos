@@ -82,22 +82,22 @@ spec:
               trigger:
                 schedule: "15 23 * * *"        
 
-    cnpg:
-      main:
-        mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
-        backups:
-          enabled: false
-          credentials: s3
-          scheduledBackups:
-            - name: daily-backup
-              schedule: "0 20 23 * * *"
-              backupOwnerReference: self
-              immediate: true
-              suspend: false           
-          retentionPolicy: "14d"
-          revision: "2"
-        recovery:
-          method: object_store
-          credentials: s3
-          revision: "1"
+    # cnpg:
+    #   main:
+    #     # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+    #     backups:
+    #       enabled: true
+    #       credentials: s3
+    #       scheduledBackups:
+    #         - name: daily-backup
+    #           schedule: "0 20 23 * * *"
+    #           backupOwnerReference: self
+    #           immediate: true
+    #           suspend: false           
+    #       retentionPolicy: "14d"
+    #       revision: "1"
+    #     recovery:
+    #       method: object_store
+    #       credentials: s3
+    #       revision: ""
       
