@@ -45,7 +45,7 @@ spec:
                 SPEEDTEST_SCHEDULE: "0 * * * *"
                 PRUNE_RESULTS_OLDER_THAN: 90
                 DISPLAY_TIMEZONE: "America/Chicago"
-                SPEEDTEST_SERVERS: "64611"
+                SPEEDTEST_SERVERS: "32338"
 
     credentials:
       s3:
