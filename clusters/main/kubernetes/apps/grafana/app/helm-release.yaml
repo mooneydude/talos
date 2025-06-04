@@ -45,3 +45,7 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
+            
+    configmap:
+      dashboard-nginx:
+        enabled: true
