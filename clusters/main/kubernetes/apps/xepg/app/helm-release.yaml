@@ -65,5 +65,5 @@ spec:
                 MAXCONNECTIONS: "5"
                 DAYS: "2"
                 DELAY: "10"
-                # SITE: "plex.tv"             
+                SITE: "zap2it.com"             
                 # SERVER_ROOT: "/html"                   
