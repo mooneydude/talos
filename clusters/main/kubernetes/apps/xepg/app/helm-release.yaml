@@ -64,5 +64,6 @@ spec:
                 CRON: "0 0 * * *"
                 MAXCONNECTIONS: "5"
                 DAYS: "2"
-                DELAY: "10"             
+                DELAY: "10"
+                SITE: "plex.tv"             
                 # SERVER_ROOT: "/html"                   
