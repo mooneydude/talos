@@ -38,7 +38,7 @@ spec:
     image:
       repository: docker.io/mooneydude/xepg
       pullPolicy: IfNotPresent
-      tag: latest@sha256:7230528def3e552e0fa4d4864676c4871bc61063619c9f13e50e64a9717cf614
+      tag: latest@latest
     securityContext:
       container:
         readOnlyRootFilesystem: false
@@ -61,9 +61,12 @@ spec:
             main:
               env:
                 SERVER_PORT: "{{ .Values.service.main.ports.main.port }}"
-                CRON: "0 0 * * *"
-                MAXCONNECTIONS: "5"
+                CRON: "5 0 * * *"
+                CRON2: "10 0 * * *"
+                CRON3: "20 0 * * *"
+                MAX_CONNECTIONS: "5"
                 DAYS: "2"
-                DELAY: "10"
+                DELAY: "100"
+                TIMEOUT: "3000"
                 # SITE: "zap2it.com"             
                 # SERVER_ROOT: "/html"                   
