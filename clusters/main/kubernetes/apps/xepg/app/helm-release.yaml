@@ -62,8 +62,8 @@ spec:
               env:
                 SERVER_PORT: "{{ .Values.service.main.ports.main.port }}"
                 CRON: "5 0 * * *"
-                CRON2: "12 35 * * *"
-                CRON3: "20 0 * * *"
+                CRON2: "10 13 * * *"
+                CRON3: "20 13 * * *"
                 MAX_CONNECTIONS: "1"
                 DAYS: "2"
                 DELAY: "500"
