@@ -57,21 +57,25 @@ spec:
             certificateIssuer: domain-0-le-prod         
     persistence:
       data:
+        storageClass: ceph-filesystem
+        size: 10Gi
+        accessModes:
+          - ReadWriteMany        
         volsync:
         - name: data
           type: restic
           credentials: s3
           dest:
-            volumeSnapshotClassName: csi-ceph-blockpool 
+            volumeSnapshotClassName: ceph-filesystem
             enabled: true
           src:
-            volumeSnapshotClassName: csi-ceph-blockpool 
+            volumeSnapshotClassName: ceph-filesystem 
             enabled: true
             trigger:
               schedule: "15 15 * * *"        
     cnpg:
       main:
-        mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+        # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
           enabled: true  # Set to 'false' when performing new install (recovery)
           credentials: s3
@@ -81,9 +85,9 @@ spec:
               backupOwnerReference: self
               immediate: true
               suspend: false          
-          revision: "2"
+          revision: "1"
         recovery:
           method: object_store
           credentials: s3
-          revision: "1"
+          revision: ""
 
