@@ -69,15 +69,19 @@ spec:
             certificateIssuer: domain-0-le-prod         
     persistence:
       config:
+        storageClass: ceph-filesystem
+        size: 1Gi
+        accessModes:
+          - ReadWriteMany       
         volsync:
           - name: config
             type: restic
             credentials: s3
             dest:
-              volumeSnapshotClassName: csi-ceph-blockpool               
+              volumeSnapshotClassName: ceph-filesystem               
               enabled: true
             src:  
-              volumeSnapshotClassName: csi-ceph-blockpool            
+              volumeSnapshotClassName: ceph-filesystem            
               enabled: true
               trigger:
                 schedule: "15 23 * * *"        
