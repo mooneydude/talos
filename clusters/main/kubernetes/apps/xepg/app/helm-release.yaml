@@ -38,7 +38,7 @@ spec:
     image:
       repository: docker.io/mooneydude/xepg
       pullPolicy: IfNotPresent
-      tag: latest@sha256:3a3563d4ffc2f567047f28cb1f1b0e691bf37b013da27d7d8aa25b86edee21e9
+      tag: latest@sha256:28cdc0d07f0b9671e7c9c67c1b5e841561ae12687b8a183726f4e66ae9e312a0
     securityContext:
       container:
         readOnlyRootFilesystem: false
@@ -62,7 +62,7 @@ spec:
               env:
                 SERVER_PORT: "{{ .Values.service.main.ports.main.port }}"
                 CRON: "5 0 * * *"
-                CRON2: "40 21 * * *"
+                CRON2: "10 0 * * *"
                 CRON3: "20 0 * * *"
                 MAX_CONNECTIONS: "1"
                 DAYS: "2"
