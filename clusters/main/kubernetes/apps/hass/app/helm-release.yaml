@@ -38,7 +38,7 @@ spec:
       s3:
         type: s3
         url: "${MINIO_S3URL}"
-        bucket: "${MINIO_S3PREFIX}-hass"
+        bucket: "${MINIO_S3PREFIX}-hass-rwx"
         accessKey: "${MINIO_S3ID}"
         secretKey: "${MINIO_S3KEY}"
         encrKey: "${MINIO_S3KEY}"
@@ -71,15 +71,19 @@ spec:
       - 172.17.0.0/16
     persistence:
       config:
+        storageClass: ceph-filesystem
+        size: 1Gi
+        accessModes:
+          - ReadWriteMany        
         volsync:
           - name: b2
             type: restic
             credentials: s3
             dest:
-              volumeSnapshotClassName: csi-ceph-blockpool 
+              volumeSnapshotClassName: ceph-filesystem
               enabled: true
             src:
-              volumeSnapshotClassName: csi-ceph-blockpool 
+              volumeSnapshotClassName: ceph-filesystem 
               enabled: true
               trigger:
                 schedule: "30 14 * * *"      

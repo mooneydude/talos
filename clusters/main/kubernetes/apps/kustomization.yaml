@@ -5,7 +5,7 @@ resources:
   - cloudflared/ks.yaml
   - docuseal/ks.yaml
   - ext-cow/ks.yaml
-  # - hass/ks.yaml
+  - hass/ks.yaml
   - jellyfin/ks.yaml
   - speedtest-tracker/ks.yaml
   - ext-plex/ks.yaml
