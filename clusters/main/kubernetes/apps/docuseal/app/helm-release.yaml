@@ -75,7 +75,7 @@ spec:
               schedule: "15 15 * * *"        
     cnpg:
       main:
-        # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+        mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
           enabled: true  # Set to 'false' when performing new install (recovery)
           credentials: s3
