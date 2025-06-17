@@ -18,4 +18,4 @@ resources:
   - xteve/ks.yaml
   - grafana/ks.yaml
   # - telly/ks.yaml
-  # - hassOld/ks.yaml
+  - hass-old/ks.yaml
