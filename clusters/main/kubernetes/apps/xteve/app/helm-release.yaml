@@ -52,7 +52,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: internal 
+        ingressClassName: external 
         hosts:
           - host: xteve.${DOMAIN_1}
         integrations:
