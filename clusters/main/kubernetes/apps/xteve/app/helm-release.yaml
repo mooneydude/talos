@@ -37,7 +37,7 @@ spec:
       s3:
         type: s3
         url: "${MINIO_S3URL}"
-        bucket: "${MINIO_S3PREFIX}-xteve"
+        bucket: "${MINIO_S3PREFIX}-xteve-rwx"
         accessKey: "${MINIO_S3ID}"
         secretKey: "${MINIO_S3KEY}"
         encrKey: "${MINIO_S3KEY}"
@@ -52,7 +52,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: external 
+        ingressClassName: internal 
         hosts:
           - host: xteve.${DOMAIN_1}
         integrations:
@@ -63,15 +63,18 @@ spec:
             certificateIssuer: domain-0-le-prod 
     persistence:
       config:
+        storageClass: ceph-filesystem
         size: 1Gi
+        accessModes:
+          - ReadWriteMany 
         volsync:
           - name: config
             type: restic
             credentials: s3
             src:
-              volumeSnapshotClassName: csi-ceph-blockpool 
+              volumeSnapshotClassName: ceph-filesystem
               enabled: true
               schedule: "0 16 * * *"  
             dest:
-              volumeSnapshotClassName: csi-ceph-blockpool 
+              volumeSnapshotClassName: ceph-filesystem
               enabled: true
