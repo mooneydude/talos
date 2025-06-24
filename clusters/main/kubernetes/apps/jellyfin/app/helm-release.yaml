@@ -36,7 +36,7 @@ spec:
         s3:
           type: s3
           url: "${MINIO_S3URL}"
-          bucket: "${MINIO_S3PREFIX}-jellyfin"
+          bucket: "${MINIO_S3PREFIX}-jellyfin-rwx"
           accessKey: "${MINIO_S3ID}"
           secretKey: "${MINIO_S3KEY}"
           encrKey: "${MINIO_S3KEY}"
@@ -54,13 +54,17 @@ spec:
               certificateIssuer: domain-0-le-prod  
       persistence:
         config:
+          storageClass: ceph-filesystem
+          size: 1Gi
+          accessModes:
+            - ReadWriteMany           
           volsync:
           - name: b2
             type: restic
             credentials: s3
             dest:
-              volumeSnapshotClassName: csi-ceph-blockpool 
+              volumeSnapshotClassName: ceph-filesystem
               enabled: true
             src:
-              volumeSnapshotClassName: csi-ceph-blockpool 
+              volumeSnapshotClassName: ceph-filesystem
               enabled: true
