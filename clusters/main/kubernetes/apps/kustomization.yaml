@@ -9,7 +9,7 @@ resources:
   - jellyfin/ks.yaml
   - speedtest-tracker/ks.yaml
   - ext-plex/ks.yaml
-  - vaultwarden/ks.yaml
+  # - vaultwarden/ks.yaml
   - immich/ks.yaml
   - nextcloud/ks.yaml
   # - ext-talk/ks.yaml
