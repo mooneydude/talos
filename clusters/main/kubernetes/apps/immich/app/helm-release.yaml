@@ -38,7 +38,7 @@ spec:
       s3:
         type: s3
         url: "${MINIO_S3URL}"
-        bucket: "${MINIO_S3PREFIX}-immich"
+        bucket: "${MINIO_S3PREFIX}-immich-rwx"
         accessKey: "${MINIO_S3ID}"
         secretKey: "${MINIO_S3KEY}"
         encrKey: "${MINIO_S3KEY}"       
@@ -56,28 +56,35 @@ spec:
             certificateIssuer: domain-0-le-prod
     persistence:
       profile:
+        storageClass: ceph-filesystem
+        size: 1Gi
+        accessModes:
+          - ReadWriteMany        
         volsync:
           - name: prf
             type: restic
             credentials: s3
             dest:
-              volumeSnapshotClassName: csi-ceph-blockpool
+              volumeSnapshotClassName: ceph-filesystem
               enabled: true
             src:
-              volumeSnapshotClassName: csi-ceph-blockpool
+              volumeSnapshotClassName: ceph-filesystem
               enabled: true
+      # thumbs:
+      #   volsync:
+      #     - name: thn
+      #       type: restic
+      #       credentials: s3
+      #       dest:
+      #         volumeSnapshotClassName: csi-ceph-blockpool
+      #         enabled: true
+      #       src:
+      #         volumeSnapshotClassName: csi-ceph-blockpool
+      #         enabled: true
       thumbs:
-        volsync:
-          - name: thn
-            type: restic
-            credentials: s3
-            dest:
-              volumeSnapshotClassName: csi-ceph-blockpool
-              enabled: true
-            src:
-              volumeSnapshotClassName: csi-ceph-blockpool
-              enabled: true
-
+        type: nfs
+        server: ${TRUENAS_IP}
+        path: /mnt/data1/immich/thumbs
       backups:
         type: nfs
         server: ${TRUENAS_IP}
@@ -115,8 +122,8 @@ spec:
           enabled: true  # Set to 'false' when performing new install (recovery)
           credentials: s3
           retentionPolicy: "7d"
-          revision: "2"
+          revision: "1"
         recovery:
           method: object_store
           credentials: s3
-          revision: "1"
+          revision: ""
