@@ -16,5 +16,5 @@ resources:
   # - stun-turn/ks.yaml
   - xepg/ks.yaml
   - xteve/ks.yaml
-  - grafana/ks.yaml
+  # - grafana/ks.yaml
   # - telly/ks.yaml
