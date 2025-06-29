@@ -18,3 +18,4 @@ resources:
   - xteve/ks.yaml
   - grafana/ks.yaml
   # - telly/ks.yaml
+  - rustdesk/ks.yaml
