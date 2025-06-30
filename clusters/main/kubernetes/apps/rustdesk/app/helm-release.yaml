@@ -41,18 +41,20 @@ spec:
         secretKey: "${MINIO_S3KEY}"
         encrKey: "${MINIO_S3KEY}"
     TZ: America/Chicago
-    ingress:
+    portal:
+      open:
+        enabled: false
+    # workload:
+    #   main:
+    #     podSpec:
+    #       containers:
+    #         main:
+    #           env:
+    #             RELAY: "wireguard.${DOMAIN_1}:21117"
+    service:
       main:
-        enabled: true
-        ingressClassName: external
-        hosts:
-          - host: desk.${DOMAIN_1}
-        integrations:
-          traefik:
-            enabled: false
-          certManager:
-            enabled: true
-            certificateIssuer: domain-0-le-prod         
+        loadBalancerIP: ${RUSTDESK_IP}
+        type: LoadBalancer
     persistence:
       data:
         storageClass: ceph-filesystem
