@@ -13,7 +13,7 @@ resources:
   - immich/ks.yaml
   - nextcloud/ks.yaml
   - ext-talk/ks.yaml
-  # - stun-turn/ks.yaml
+  - stun-turn/ks.yaml
   # - xepg/ks.yaml
   - xteve/ks.yaml
   - grafana/ks.yaml
