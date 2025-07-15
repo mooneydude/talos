@@ -118,9 +118,10 @@ spec:
 
       ingress:
         dashboard:
+          ingressClassName: internal
           annotations:
             # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-            kubernetes.io/ingress.class: internal
+            kubernetes.io/ingress.class: internal #was nginx
             cert-manager.io/cluster-issuer: domain-0-le-prod
             cert-manager.io/private-key-rotation-policy: Always
             nginx.ingress.kubernetes.io/ssl-redirect: "true"
