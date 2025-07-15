@@ -118,7 +118,7 @@ spec:
 
       ingress:
         dashboard:
-          ingressClassName: internal
+          ingressClassName: internal #added this to prevent external default when using nginx in annotations
           annotations:
             # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
             kubernetes.io/ingress.class: internal #was nginx
