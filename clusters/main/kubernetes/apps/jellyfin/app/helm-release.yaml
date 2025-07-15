@@ -31,7 +31,7 @@ spec:
         open:
           enabled: false
       global:
-        stopAll: true
+        stopAll: false
       credentials:
         s3:
           type: s3
