@@ -43,12 +43,10 @@ spec:
       ingress:
         main:
           enabled: true
-          ingressClassName: external
+          ingressClassName: internal
           hosts:
             - host: tv.${DOMAIN_1}
           integrations:
-            traefik:
-              enabled: false
             certManager:
               enabled: true
               certificateIssuer: domain-0-le-prod  
