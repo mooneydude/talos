@@ -40,6 +40,9 @@ spec:
         enabled: true
         loadBalancerIP: ${TURN_IP}
         type: LoadBalancer
+        integrations:
+          metallb:
+            enabled: true
         ports:
           main:
             enabled: true

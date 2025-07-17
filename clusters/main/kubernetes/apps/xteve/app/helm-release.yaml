@@ -45,6 +45,9 @@ spec:
       main:
         type: LoadBalancer
         loadBalancerIP: ${XTEVE_IP}
+        integrations:
+          metallb:
+            enabled: true
         ports:
           main:
             port: 34400

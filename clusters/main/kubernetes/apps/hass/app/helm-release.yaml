@@ -47,6 +47,9 @@ spec:
         enabled: true
         loadBalancerIP: ${HASS_IP}
         type: LoadBalancer
+        integrations:
+          metallb:
+            enabled: true
         ports:
           main:
             enabled: true

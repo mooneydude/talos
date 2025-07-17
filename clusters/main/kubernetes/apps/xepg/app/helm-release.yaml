@@ -49,6 +49,9 @@ spec:
       main:
         type: LoadBalancer
         loadBalancerIP: ${XMLTV_IP}
+        integrations:
+          metallb:
+            enabled: true
         ports:
           main:
             port: 3000

@@ -55,6 +55,9 @@ spec:
       main:
         loadBalancerIP: ${RUSTDESK_IP}
         type: LoadBalancer
+        integrations:
+          metallb:
+            enabled: true
     persistence:
       data:
         storageClass: ceph-filesystem

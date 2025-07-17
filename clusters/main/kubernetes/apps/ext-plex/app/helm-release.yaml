@@ -36,6 +36,9 @@ spec:
       main:
         type: ExternalIP
         externalIP: ${PLEX_IP}
+        integrations:
+          metallb:
+            enabled: true
         ports:
           main:
             protocol: http

@@ -48,6 +48,9 @@ spec:
       main:
         type: LoadBalancer
         loadBalancerIP: ${TELLY_IP}
+        integrations:
+          metallb:
+            enabled: true
         ports:
           main:
             port: 6077
