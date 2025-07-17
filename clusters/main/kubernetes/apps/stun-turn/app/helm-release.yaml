@@ -28,13 +28,13 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-
   values:
     global:
       stopAll: false
-
     TZ: America/Chicago
-    
+    resources:
+      requests:
+        cpu: 10m    
     service:
       main:
         enabled: true

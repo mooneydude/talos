@@ -32,9 +32,10 @@ spec:
   values:
     global:
       stopAll: false
-
     TZ: America/Chicago
-
+    resources:
+      requests:
+        cpu: 10m
     image:
       repository: docker.io/mooneydude/xepg
       pullPolicy: IfNotPresent

@@ -32,6 +32,9 @@ spec:
     global:
       stopAll: false
     TZ: America/Chicago
+    resources:
+      requests:
+        cpu: 10m
     credentials:
       s3:
         type: s3

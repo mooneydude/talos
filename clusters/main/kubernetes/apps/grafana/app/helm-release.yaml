@@ -30,9 +30,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
-
     TZ: America/Chicago
-
+    resources:
+      requests:
+        cpu: 10m
     ingress:
       main:
         enabled: true

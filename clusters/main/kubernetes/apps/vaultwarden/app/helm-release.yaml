@@ -28,11 +28,12 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-
   values:
     global:
       stopAll: false
-
+    resources:
+      requests:
+        cpu: 10m
     TZ: America/Chicago
     credentials:
       s3:

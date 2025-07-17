@@ -43,6 +43,9 @@ spec:
         secretKey: "${MINIO_S3KEY}"
         encrKey: "${MINIO_S3KEY}"       
     TZ: America/Chicago
+    resources:
+      requests:
+        cpu: 10m    
     ingress:
       main:
         enabled: true

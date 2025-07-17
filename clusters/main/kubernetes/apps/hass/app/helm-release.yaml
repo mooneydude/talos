@@ -31,7 +31,10 @@ spec:
   values:
     ## Enable host networking for direct network access. True breaks K8s security.
     # hostNetwork: true
-    TZ: America/Chicago   
+    TZ: America/Chicago 
+    resources:
+      requests:
+        cpu: 10m      
     global:
       stopAll: false 
     credentials:

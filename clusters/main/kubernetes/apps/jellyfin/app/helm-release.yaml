@@ -26,7 +26,10 @@ spec:
             retries: 3
     timeout: 20m
     values:
-      TZ: America/Chicago    
+      TZ: America/Chicago
+      resources:
+        requests:
+          cpu: 10m         
       portal:
         open:
           enabled: false
