@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: nextcloud
-      version: 36.2.2
+      version: 35.1.3
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -32,9 +32,6 @@ spec:
     global:
       stopAll: false
     TZ: America/Chicago
-    resources:
-      requests:
-        cpu: 10m
     credentials:
       s3:
         type: s3
@@ -103,7 +100,7 @@ spec:
       main:
         mode: recovery
         backups:
-          enabled: true
+          enabled: false
           credentials: s3
           scheduledBackups:
             - name: daily-backup
