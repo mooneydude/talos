@@ -55,8 +55,6 @@ spec:
           - host: "${DOMAIN_5}"
           - host: "${DOMAIN_6}"
         integrations:
-          traefik:
-            enabled: false
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod

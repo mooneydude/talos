@@ -49,11 +49,7 @@ spec:
             paths:
             - path: /
               pathType: Prefix
-        integrations:
-          traefik:
-            enabled: false
-            entrypoints:
-              - websecure        
+        integrations:      
           certManager:
             certificateIssuer: domain-0-le-prod
             enabled: true

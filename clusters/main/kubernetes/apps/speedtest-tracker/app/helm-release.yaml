@@ -48,8 +48,6 @@ spec:
         hosts:
           - host: speed.${DOMAIN_1}
         integrations:
-          traefik:
-            enabled: false
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod         
