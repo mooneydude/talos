@@ -116,7 +116,7 @@ spec:
         recovery:
           method: object_store
           credentials: s3
-          revision: "3"
+          revision: "4"
     nextcloud:
       credentials:
         initialAdminPassword: ${NEXTCLOUD_PWD}
