@@ -33,20 +33,6 @@ spec:
     TZ: America/Chicago
     global:
       stopAll: false    
-    workload:
-      main:
-        podSpec:
-          containers:
-            main:
-              env:
-                PUBLIC_DASHBOARD: false
-                CHART_DATETIME_FORMAT: "d.m H:i"
-                DATETIME_FORMAT: "d.m.Y H:i"
-                SPEEDTEST_SCHEDULE: "0 * * * *"
-                PRUNE_RESULTS_OLDER_THAN: 90
-                DISPLAY_TIMEZONE: "America/Chicago"
-                SPEEDTEST_SERVERS: "32338"
-
     credentials:
       s3:
         type: s3
@@ -84,13 +70,12 @@ spec:
               volumeSnapshotClassName: ceph-filesystem            
               enabled: true
               trigger:
-                schedule: "15 23 * * *"        
-
+                schedule: "15 23 * * *"
     cnpg:
       main:
-        mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
+        # mode: recovery   # Set to 'recovery' when recovery from S3, also change the revisions 
         backups:
-          enabled: false
+          enabled: true
           credentials: s3
           scheduledBackups:
             - name: daily-backup
@@ -104,4 +89,16 @@ spec:
           method: object_store
           credentials: s3
           revision: "1"
-      
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              env:
+                PUBLIC_DASHBOARD: false
+                CHART_DATETIME_FORMAT: "d.m H:i"
+                DATETIME_FORMAT: "d.m.Y H:i"
+                SPEEDTEST_SCHEDULE: "0 * * * *"
+                PRUNE_RESULTS_OLDER_THAN: 90
+                DISPLAY_TIMEZONE: "America/Chicago"
+                SPEEDTEST_SERVERS: "32338"      
