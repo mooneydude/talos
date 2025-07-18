@@ -29,13 +29,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    ## set stopAll to "true" if you do not want to use blocky
-    # and/or disable its service
     global:
       stopAll: false
-    resources:
-      requests:
-        cpu: 10m
     service:
       dns:
         externalTrafficPolicy: Local
@@ -44,8 +39,12 @@ spec:
         integrations:
           metallb:
             enabled: true
+    workload:
+      main:
+        replicas: 1
+    blocking:
+      clientGroupsBlock:  []
     k8sgateway:
-      # -- list of processed domains
       domains:
       - domain: "${DOMAIN_0}"
         dnsChallenge:
@@ -55,28 +54,21 @@ spec:
         dnsChallenge:
           enabled: false
           domain: dns01.clouddns.com
-      # forward:
-      #   enabled: false
-      #   primary: tls://1.1.1.1
-      #   secondary: tls://1.0.0.1
-      #   options:
-      #     - name: tls_servername
-      #       value: cloudflare-dns.com
     defaultUpstreams:
     - "https://1.1.1.1/dns-query"
     bootstrapDns:
       ips: []
-      upstream: "1.1.1.1"    
+      upstream: "1.1.1.1"
     queryLog:
-      # optional one of: mysql, postgresql, csv, csv-client. If empty, log to console only
-      type: "postgresql"
-
-    # configmap:
-    #   dashboard:
-    #     enabled: false
-    #   datasource:
-    #     enabled: false
-
-    # cnpg:
-    #   main:
-    #     enabled: false
+      type: ""
+    configmap:
+      dashboard:
+        enabled: false
+      datasource:
+        enabled: false
+    cnpg:
+      main:
+        enabled: false
+    metrics:
+      main:
+        enabled: false
